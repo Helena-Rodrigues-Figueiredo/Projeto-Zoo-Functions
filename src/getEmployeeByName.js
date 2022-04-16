@@ -3,14 +3,14 @@ const data = require('../data/zoo_data');
 const { employees } = data;
 
 function getEmployeeByName(employeeName) {
-  if (employeeName === undefined) {
-    return {};
-  };
-  const teste = species.filter((element) => {
-    if(element.firstName === employeeName || element.lastName === employeeName) {
-      return element;
-    };
-  )};
-};
+  let retorno = {};
+  employees.filter((empregado) => {
+    if (employeeName === empregado.firstName || employeeName === empregado.lastName) {
+      retorno = empregado;
+    }
+    return retorno;
+  });
+  return retorno;
+}
 
 module.exports = getEmployeeByName;
