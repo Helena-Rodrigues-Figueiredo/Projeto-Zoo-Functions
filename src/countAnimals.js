@@ -6,7 +6,8 @@ const qntPorEspecie = species.map((especie) => especie.residents.length);
 
 function countAnimals(animal) {
   const objeto = {};
-  if (animal === undefined) {
+  let retornoNumerico;
+  if (!animal) {
     todasEspecies.forEach((each, i) => {
       objeto[each] = qntPorEspecie[i];
     });
@@ -14,12 +15,12 @@ function countAnimals(animal) {
   }
   species.find((cadaEspecie) => {
     if (animal.specie === cadaEspecie.name) {
-      return cadaEspecie.residents.length;
+      retornoNumerico = cadaEspecie.residents.length;
     }
-    return cadaEspecie.residents.length;
+    return retornoNumerico;
   });
 }
 
-console.log(countAnimals({ specie: 'penguins' }));
+console.log(countAnimals());
 
 module.exports = countAnimals;
