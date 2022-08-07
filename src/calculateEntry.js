@@ -1,31 +1,19 @@
-// const { employees } = require('../data/zoo_data');
 const data = require('../data/zoo_data');
 
 const { prices } = data;
 
 function countEntrants(entrants) {
-  const obj = { child: 0, adult: 0, senior: 0 };
-  entrants.forEach((dado) => {
-    if (dado.age < 18) {
-      obj.child += 1;
-    } else if (dado.age >= 18 && dado.age < 50) {
-      obj.adult += 1;
-    } else {
-      obj.senior += 1;
-    }
-  });
-  return obj;
+  const childAge = entrants.filter((person) => person.age < 18).length;
+  const adultAge = entrants.filter((person) => person.age >= 18 && person.age < 50).length;
+  const seniorAge = entrants.filter((person) => person.age >= 50).length;
+  return { child: childAge, adult: adultAge, senior: seniorAge };
 }
 
 function calculateEntry(entrants) {
-  if (!entrants || Object.keys(entrants).length === 0) {
-    return 0;
-  }
-  const crianca = countEntrants(entrants).child * prices.child;
-  const adulto = countEntrants(entrants).adult * prices.adult;
-  const idoso = countEntrants(entrants).senior * prices.senior;
-  const soma = crianca + adulto + idoso;
-  return soma;
+  if (!entrants || Object.keys(entrants).length === 0) return 0;
+  const entrantsAges = countEntrants(entrants);
+  const { child, adult, senior } = entrantsAges;
+  return (child * prices.child) + (adult * prices.adult) + (senior * prices.senior);
 }
 
 module.exports = { calculateEntry, countEntrants };
