@@ -1,30 +1,21 @@
 const data = require('../data/zoo_data');
 
 const { species } = data;
-const todasEspecies = species.map((especie) => especie.name);
-const qntPorEspecie = species.map((especie) => especie.residents.length);
 
 function countAnimals(animal) {
-  const objeto = {};
   if (!animal) {
-    todasEspecies.forEach((each, i) => {
-      objeto[each] = qntPorEspecie[i];
-    });
-    return objeto;
+    return species.reduce((acc, specie) => {
+      const quantity = specie.residents.length;
+      acc[specie.name] = quantity;
+      return acc;
+    }, {});
   }
-  if (animal.sex === 'female') {
-    const especies = species.find((cadaEspecie) => animal.specie === cadaEspecie.name).residents;
-    return especies.filter((each) => each.sex === 'female').length;
+  if (animal.sex && animal.specie) {
+    const specieQuantity = species.find((specie) => specie.name === animal.specie).residents
+      .filter((element) => element.sex === animal.sex).length;
+    return specieQuantity;
   }
-  if (animal.sex === 'male') {
-    const especies = species.find((cadaEspecie) => animal.specie === cadaEspecie.name).residents;
-    return especies.filter((each) => each.sex === 'male').length;
-  }
-  const especies = species.find((cadaEspecie) => animal.specie === cadaEspecie.name)
-    .residents.length;
-  return especies;
+  return species.find((specie) => specie.name === animal.specie).residents.length;
 }
-
-console.log(countAnimals({ specie: 'lions' }));
 
 module.exports = countAnimals;
