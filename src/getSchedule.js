@@ -70,6 +70,4 @@ function getSchedule(scheduleTarget) {
   return parametroVazio();
 }
 
-console.log(getSchedule());
-
 module.exports = getSchedule;

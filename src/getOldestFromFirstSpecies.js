@@ -11,6 +11,4 @@ function getOldestFromFirstSpecies(id) {
   return [maisVelho.name, maisVelho.sex, maisVelho.age];
 }
 
-console.log(getOldestFromFirstSpecies('c1f50212-35a6-4ecd-8223-f835538526c2'));
-
 module.exports = getOldestFromFirstSpecies;
